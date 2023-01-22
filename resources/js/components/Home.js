@@ -1,28 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Posts from "./Posts";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Rightbar from "./Rightbar";
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 class Home extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            counter: 0
+        }
+        this.incrementCount = this.incrementCount.bind(this)
+    }
+
+    componentDidMount() {
+
+    }
+
+    incrementCount() {
+        let counter = this.state.counter
+        this.setState({counter: counter+1})
+    }
+
     render(){
         return(
-            <div className="layout">
-                <div className="sidebar">
-                    <h1>Your</h1>
-                    <h1>All Posts</h1>
-                    <div className="actionBtn">
-                        <button className="unactive"><FontAwesomeIcon icon="home" className="icon"/>Home</button>
-                        <button className="active"><Link to="/dashboard"><FontAwesomeIcon icon="desktop" className="icon"/>Dashboard</Link></button>
-                        <button className="active"><Link to="/addPosts"><FontAwesomeIcon icon="pencil-alt" className="icon"/>Create Posts</Link></button>
-                    </div>
+           <div className='d-flex w-100 h-100 min-vh-100 align-items-center'>
+                <div className='w-100 text-center'>
+                    <h3 className='counter'>{this.state.counter}</h3>
+                    <button className='btn btn-light' onClick={this.incrementCount}>Click Me!</button>
                 </div>
-                <div className="PostDiv">
-                    <Posts />
-                </div>
-                <Rightbar />
-            </div>
+           </div> 
         )
     }
 }
 
 export default Home;
+
+if (document.getElementById('app')) {
+    ReactDOM.render(<Home />, document.getElementById('app'));
+}

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePosts extends Migration
+class CreateCounterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreatePosts extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('counter', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->string("type");
-            $table->string("description");
+            $table->integer('count');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreatePosts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('counter');
     }
 }

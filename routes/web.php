@@ -13,17 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/dashboard', function () {
-    return view('welcome');
-});
-Route::get('/addPosts', function () {
-    return view('welcome');
-});
-Route::get('/edit/:id', function () {
-    return view('welcome');
-})->name('example');
-
-Route::resource('/addPost', "postController");
+Route::get('{any}', function () {
+    return view('app');
+})->where('any', '.*');
