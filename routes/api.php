@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ClickController;
 use App\Http\Controllers\CountController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware(['management'])->group(function(){
+    Route::get('counts', [CountController::class, 'index']);
+    Route::post('counts', [CountController::class, 'store']);
 });
 
-Route::get('counts', [CountController::class, 'index']);
-Route::post('counts', [CountController::class, 'store']);
+// User Registration
+Route::post('users', [UserController::class, 'store']);

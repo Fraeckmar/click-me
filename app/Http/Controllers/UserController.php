@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CountRequest;
-use App\Models\Count;
-use Carbon\Carbon;
+use App\Helpers\AuthHelper;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class CountController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,7 @@ class CountController extends Controller
      */
     public function index()
     {
-        $count = Count::whereDate('created_at', Carbon::now())
-                        ->orderBy('id', 'desc')
-                        ->get('count')->first();
-        return $count ? $count->count : 0;
+        //
     }
 
     /**
@@ -39,12 +36,15 @@ class CountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CountRequest $request)
+    public function store(UserRequest $request)
     {
-        $count = new Count();
-        $count->count = $request->count;
-        $count->save();
-        return response()->json($count);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return response()->json($user);
     }
 
     /**

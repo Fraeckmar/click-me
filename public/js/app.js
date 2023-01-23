@@ -65731,7 +65731,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var BASE_API_URL = "http://localhost:8000/api";
+var USER = {
+  id: 1
+};
+var AUTH_PARAMS = {
+  user_id: USER.id
+};
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.baseURL = BASE_API_URL;
+axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.params = AUTH_PARAMS;
 /* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /***/ }),
@@ -65844,6 +65851,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var USER = {
+  user_id: 1
+};
 
 var Home = /*#__PURE__*/function (_React$Component) {
   _inherits(Home, _React$Component);
@@ -65877,6 +65887,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
       setInterval(function () {
         if (_this2.state.counter !== 0 && _this2.state.counter !== _this2.state.prevCount) {
           _api_API__WEBPACK_IMPORTED_MODULE_2__["default"].post('counts', {
+            user_id: USER.user_id,
             count: _this2.state.counter
           }).then(function (res) {
             _this2.setState({
@@ -65886,7 +65897,9 @@ var Home = /*#__PURE__*/function (_React$Component) {
         }
       }, 2000); // Get previous counts 
 
-      _api_API__WEBPACK_IMPORTED_MODULE_2__["default"].get('/counts').then(function (res) {
+      _api_API__WEBPACK_IMPORTED_MODULE_2__["default"].get('counts', {
+        params: USER
+      }).then(function (res) {
         _this2.setState({
           counter: res.data
         });

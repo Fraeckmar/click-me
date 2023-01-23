@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import API from '../api/API'
+const USER = {user_id: 1}
 
 class Home extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class Home extends React.Component {
         setInterval(() => {
             if (this.state.counter !== 0 && this.state.counter !== this.state.prevCount) {
                 API.post('counts', {
+                    user_id: USER.user_id,
                     count: this.state.counter
                 })
                 .then((res) => {
@@ -31,7 +33,9 @@ class Home extends React.Component {
         }, 2000)
 
         // Get previous counts 
-        API.get('/counts')
+        API.get('counts', {
+            params: USER
+        })
         .then((res) => {
             this.setState({counter: res.data})
         })
