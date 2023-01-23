@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCounterTable extends Migration
+class CreateCountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCounterTable extends Migration
      */
     public function up()
     {
-        Schema::create('counter', function (Blueprint $table) {
+        Schema::create('counts', function (Blueprint $table) {
             $table->id();
             $table->integer('count');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateCounterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('counter');
+        Schema::dropIfExists('counts');
     }
 }
